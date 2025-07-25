@@ -7,6 +7,9 @@ A simple dll designed to hook and bypass the signature check function in Unreal 
 1. Download the latest release from the Release section.
 2. Extract the zip on the [Releases](https://github.com/rm-NoobInCoding/UniversalSigBypasser/releases) page into your game's Win64 directory (usually found in the `GAMENAME/Binaries/Win64` path).
 
+> [!TIP]
+> I used dsound.dll to load the bypasser dll. You can use any other asi loader you want instead of dsound, just remove the dsound.dll and grab a x64 asi loader from [here](https://github.com/ThirteenAG/Ultimate-ASI-Loader) then paste it in the same folder as bypasser.
+
 You're all set! Launch your game normally, and the signature checks will be automatically bypassed.
 
 ## Tested Games
