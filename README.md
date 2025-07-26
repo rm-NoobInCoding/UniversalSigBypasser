@@ -1,8 +1,6 @@
 # Unreal Engine Signature Bypasser
 
 A simple dll designed to hook and bypass the signature check function in Unreal Engine-based games, enabling modding and custom pak/utoc/ucas files in Paks folder. This bypasser is inspired by and based upon the [Lua script](https://gist.github.com/Buckminsterfullerene02/90077ce81c0fd908144498869f4ea288) originally created by LongerWarrior.
-> [!IMPORTANT]
-> If you are a modder, Using this bypasser requires you to include credit to both me and LongerWarrior in your mod’s credits section.
 
 ## Installation
 
