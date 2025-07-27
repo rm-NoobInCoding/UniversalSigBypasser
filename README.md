@@ -13,7 +13,12 @@ A simple dll designed to hook and bypass the signature check function in Unreal 
 You're all set! Launch your game normally, and the signature checks will be automatically bypassed.
 
 ## Tested Games
-I tested bypasser on mutiple games. if you tested this hook on any games and it worked, just create an issue and I will add its name in here!
+* Eriksholm: The Stolen Dream (NoobInCoding)
+* Wuchang: Fallen Feathers (NoobInCoding)
+* Dying Island 2 (NoobInCoding)
+* Coral Island (hikarosato)
+
+If you tested this hook on any games and it worked, just leave a comment [in this issue](https://github.com/rm-NoobInCoding/UniversalSigBypasser/issues/2) and I will add its name in here.
 
 ## License
 
