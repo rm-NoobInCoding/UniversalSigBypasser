@@ -19,6 +19,7 @@ You're all set! Launch your game normally, and the signature checks will be auto
 * Coral Island (hikarosato)
 * Kao the Kangaroo (hikarosato)
 * Luto (Bahasnyldz)
+* Drive Beyond Horizons (Indra881)
 
 If you tested this hook on any games and it worked, just leave a comment [in this issue](https://github.com/rm-NoobInCoding/UniversalSigBypasser/issues/2) and I will add its name in here.
 
