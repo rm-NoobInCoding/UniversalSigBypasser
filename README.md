@@ -1,16 +1,15 @@
-# Unreal Engine Signature Bypasser
+# Unreal Engine Signature Check Bypasser
 
-A simple dll designed to hook and bypass the signature check function in Unreal Engine-based games, enabling modding and custom pak/utoc/ucas files in Paks folder.
+A hook to bypass the signature check function in Unreal Engine-based games, enabling modding and custom pak/utoc/ucas loading for the games that uses *.sig files (or encryption) to verify the archives.
 
 ## Installation
 
 1. Download the latest release from the Release section.
-2. Extract the zip on the [Releases](https://github.com/rm-NoobInCoding/UniversalSigBypasser/releases) page into your game's Win64 directory (usually found in the `GAMENAME/Binaries/Win64` path).
+2. Extract the zip on the [Releases](https://github.com/rm-NoobInCoding/UniversalSigBypasser/releases) page into your game's Win64 directory (usually found in the `[Project_Name]/Binaries/Win64` path).
+
 
 > [!TIP]
 > I used dsound.dll to load the bypasser dll. You can use any other asi loader you want instead of dsound, just remove the dsound.dll and grab a x64 asi loader from [here](https://github.com/ThirteenAG/Ultimate-ASI-Loader) then paste it in the same folder as bypasser.
-
-You're all set! Launch your game normally, and the signature checks will be automatically bypassed.
 
 ## Tested Games
 * Eriksholm: The Stolen Dream (NoobInCoding)
@@ -29,6 +28,4 @@ This work is licensed under a [Creative Commons Attribution-NonCommercial 4.0 In
 
 ## Credits
 
-Special thanks to LongerWarrior for the original [Lua-based implementation.](https://gist.github.com/Buckminsterfullerene02/90077ce81c0fd908144498869f4ea288)
-
-### Happy modding!
+Special thanks to LongerWarrior for the original [Lua-based implementation](https://gist.github.com/Buckminsterfullerene02/90077ce81c0fd908144498869f4ea288).
