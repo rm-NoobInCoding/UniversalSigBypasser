@@ -1,18 +1,26 @@
 #include <Windows.h>
 #include <iostream>
 #include <cstdint>
+#include <cstring>
 #include "SignalScanner.h"
-#include "logger.h"
+#include "Logger.h"
 
 bool Patch(BYTE* address) {
+    // Patch the target function to always return true.
+    // mov al, 1; ret
+    const BYTE patchBytes[] = { 0xB0, 0x01, 0xC3 };
     DWORD oldProtect;
-    if (!VirtualProtect(address, 1, PAGE_EXECUTE_READWRITE, &oldProtect )) {
-        LogMessage(LogLevel::INFO, "UniversalPatch", __LINE__, (std::ostringstream() << "Failed to change protection at " << std::hex << address).str());
-
+    if (!VirtualProtect(address, sizeof(patchBytes), PAGE_EXECUTE_READWRITE, &oldProtect)) {
+        LogMessage(LogLevel::INFO, "UniversalPatch", __LINE__,
+                   (std::ostringstream() << "Failed to change protection at "
+                                         << std::hex << address)
+                       .str());
         return false;
     }
-    memset(address, 0xC3, 1);
-    VirtualProtect(address, 1, oldProtect, &oldProtect);
+
+    std::memcpy(address, patchBytes, sizeof(patchBytes));
+    FlushInstructionCache(GetCurrentProcess(), address, sizeof(patchBytes));
+    VirtualProtect(address, sizeof(patchBytes), oldProtect, &oldProtect);
     return true;
 }
 
@@ -35,7 +43,7 @@ void UniversalPatch() {
 	LogMessage(LogLevel::INFO, "UniversalPatch", __LINE__, "UniversalSigBypasser Loaded.");
     const char* pattern = "\x48\x8D\x0D\x00\x00\x00\x00\xE9\x00\x00\x00\x00\xCC\xCC\xCC\xCC\x48\x83\xEC\x28\xE8\x00\x00\x00\x00\x48\x89\x05\x00\x00\x00\x00\x48\x83\xC4\x28\xC3\xCC\xCC\xCC\xCC\xCC\xCC\xCC\xCC\xCC\xCC\xCC\x48\x8D\x0D\x00\x00\x00\x00\xE9\x00\x00\x00\x00\xCC\xCC\xCC\xCC\x48\x8D\x0D\x00\x00\x00\x00\xE9\x00\x00\x00\x00\xCC\xCC\xCC\xCC";
     const char* mask = "xxx????x????xxxxxxxxx????xxx????xxxxx???????????xxx????x????xxxxxxx????x????xxxx";
-    DWORD64 addr64 = FindPattern(NULL, (char*)pattern, (char*)mask);
+    DWORD64 addr64 = FindPattern(NULL, pattern, mask);
 
     if (!addr64) {
         LogMessage(LogLevel::E_ERROR, "UniversalPatch", __LINE__, "Pattern not found!");
