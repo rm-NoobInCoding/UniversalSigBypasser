@@ -9,7 +9,7 @@ A hook to bypass the signature check function in Unreal Engine-based games, enab
 
 
 > [!TIP]
-> I used dsound.dll to load the bypasser dll. You can use any other asi loader you want instead of dsound, just remove the dsound.dll and grab a x64 asi loader from [here](https://github.com/ThirteenAG/Ultimate-ASI-Loader) then paste it in the same folder as bypasser.
+> I used dsound.dll to load the bypasser dll. You can use any other asi loader you want instead of dsound, just remove the dsound.dll and grab a x64 asi loader from [here](https://github.com/ThirteenAG/Ultimate-ASI-Loader/releases) then paste it in the same folder as bypasser.
 
 ## Tested Games
 * Eriksholm: The Stolen Dream (NoobInCoding)
@@ -28,4 +28,4 @@ This work is licensed under a [Creative Commons Attribution-NonCommercial 4.0 In
 
 ## Credits
 
-Special thanks to LongerWarrior for the original [Lua-based implementation](https://gist.github.com/Buckminsterfullerene02/90077ce81c0fd908144498869f4ea288).
+LongerWarrior for the original [Lua-based implementation](https://gist.github.com/Buckminsterfullerene02/90077ce81c0fd908144498869f4ea288).
