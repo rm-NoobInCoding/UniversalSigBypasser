@@ -19,6 +19,7 @@ A hook to bypass the signature check function in Unreal Engine-based games, enab
 * Kao the Kangaroo (hikarosato)
 * Luto (Bahasnyldz)
 * Drive Beyond Horizons (Indra881)
+* Hell Is Us (VynnGfx)
 
 If you tested this hook on any games and it worked, just leave a comment [in this issue](https://github.com/rm-NoobInCoding/UniversalSigBypasser/issues/2) and I will add its name in here.
 
