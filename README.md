@@ -23,13 +23,17 @@ A hook to bypass the signature check function in Unreal Engine-based games, enab
 * Asterigos: Curse of the Stars (robson-66)
 * Valor Mortis (Dmgvol)
 * Duet Night Abyss (ziadrrr)
+* Killing Floor 3 (NeverRaR)
 
 If you tested this hook on any games and it worked, just leave a comment [in this issue](https://github.com/rm-NoobInCoding/UniversalSigBypasser/issues/2) and I will add its name in here.
 
-## License
+### If the bypasser didn't worked for you
+* Use another loader like winmm.dll
+* If the game are using Anti-Cheat (like EAC), use some method to bypass it and then launch the game in AntiCheat-free mode
+* Even if AntiCheat is disabled and in single-player mode, some games still needs to be launched offline.
 
+## License
 This work is licensed under a [Creative Commons Attribution-NonCommercial 4.0 International License](https://creativecommons.org/licenses/by-nc/4.0/).
 
 ## Credits
-
 LongerWarrior for the original [Lua-based implementation](https://gist.github.com/Buckminsterfullerene02/90077ce81c0fd908144498869f4ea288).
