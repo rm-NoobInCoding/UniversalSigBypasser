@@ -34,27 +34,54 @@ BYTE* FollowJump(BYTE* address) {
         return address + offset + 5;
     }
     else {
-        std::cout << "Wrong jump instruction offset at: 0x" << std::hex << reinterpret_cast<uintptr_t>(address) << "\n";
+        LogMessage(LogLevel::INFO, "UniversalPatch", __LINE__,
+            (std::ostringstream() << "Wrong jump instruction offset at: 0x"
+                << std::hex << reinterpret_cast<uintptr_t>(address))
+            .str());
         return nullptr;
     }
 }
 
 void UniversalPatch() {
-	LogMessage(LogLevel::INFO, "UniversalPatch", __LINE__, "UniversalSigBypasser Loaded.");
-    const char* pattern = "\x48\x8D\x0D\x00\x00\x00\x00\xE9\x00\x00\x00\x00\xCC\xCC\xCC\xCC\x48\x83\xEC\x28\xE8\x00\x00\x00\x00\x48\x89\x05\x00\x00\x00\x00\x48\x83\xC4\x28\xC3\xCC\xCC\xCC\xCC\xCC\xCC\xCC\xCC\xCC\xCC\xCC\x48\x8D\x0D\x00\x00\x00\x00\xE9\x00\x00\x00\x00\xCC\xCC\xCC\xCC\x48\x8D\x0D\x00\x00\x00\x00\xE9\x00\x00\x00\x00\xCC\xCC\xCC\xCC";
-    const char* mask = "xxx????x????xxxxxxxxx????xxx????xxxxx???????????xxx????x????xxxxxxx????x????xxxx";
-    DWORD64 addr64 = FindPattern(NULL, pattern, mask);
+    LogMessage(LogLevel::INFO, "UniversalPatch", __LINE__, "UniversalSigBypasser Loaded.");
+
+    const char* patterns[] = {
+        "\x48\x8D\x0D\x00\x00\x00\x00\xE9\x00\x00\x00\x00\xCC\xCC\xCC\xCC\x48\x83\xEC\x28\xE8\x00\x00\x00\x00\x48\x89\x05\x00\x00\x00\x00\x48\x83\xC4\x28\xC3\xCC\xCC\xCC\xCC\xCC\xCC\xCC\xCC\xCC\xCC\xCC\x48\x8D\x0D\x00\x00\x00\x00\xE9\x00\x00\x00\x00\xCC\xCC\xCC\xCC\x48\x8D\x0D\x00\x00\x00\x00\xE9\x00\x00\x00\x00\xCC\xCC\xCC\xCC",
+        "\x40\x53\x48\x83\xEC\x20\x48\x8B\xD9\xFF\x15\x00\x00\x00\x00\x48\x8B\xC8\x48\x83\xC4\x20\x5B\xC3\x41\x8B\xD8",
+        "\x41\x56\x41\x57\x48\x83\xEC\x50\x4C\x8B\xF1\x41\x8B\xD8",
+        "\x48\x8B\xC4\x48\x89\x58\x08\x48\x89\x70\x10\x48\x89\x78\x18\x41\x56\x48\x81\xEC\x00\x00\x00\x00\x45\x8B\xF1"
+    };
+
+    const char* masks[] = {
+        "xxx????x????xxxxxxxxx????xxx????xxxxx???????????xxx????x????xxxxxxx????x????xxxx",
+        "xxxxxxxxxxx????xxxxxxxxx",
+        "xxxxxxxxxxxxxx",
+        "xxxxxxxxxxxxxxxxxxx????xx"
+    };
+
+    DWORD64 addr64 = 0;
+    int offset = 0;
+
+    for (int i = 0; i < sizeof(patterns) / sizeof(patterns[0]); ++i) {
+        addr64 = FindPattern(NULL, patterns[i], masks[i]);
+        if (addr64) {
+            if (i == 0) offset = 0x37;
+            else if (i == 1) offset = 0x2A;
+            else if (i == 2) offset = 0x1B;
+            else if (i == 3) offset = 0x26;
+            LogMessage(LogLevel::INFO, "UniversalPatch", __LINE__, (std::ostringstream() << "Pattern " << i + 1 << " found at 0x" << std::hex << addr64).str());
+            break;
+        }
+    }
 
     if (!addr64) {
         LogMessage(LogLevel::E_ERROR, "UniversalPatch", __LINE__, "Pattern not found!");
         return;
     }
-    LogMessage(LogLevel::INFO, "UniversalPatch", __LINE__, (std::ostringstream() << "Pattern found at 0x" << std::hex << addr64).str());
 
     BYTE* baseAddress = reinterpret_cast<BYTE*>(addr64);
 
-
-    BYTE* firstJump = FollowJump(baseAddress + 0x37);
+    BYTE* firstJump = FollowJump(baseAddress + offset);
     if (firstJump) {
         if (Patch(firstJump))
             LogMessage(LogLevel::INFO, "UniversalPatch", __LINE__, (std::ostringstream() << "Patch applied at 0x" << std::hex << reinterpret_cast<uintptr_t>(firstJump)).str());
