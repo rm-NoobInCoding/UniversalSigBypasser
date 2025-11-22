@@ -24,6 +24,7 @@ A hook to bypass the signature check function in Unreal Engine-based games, enab
 * Valor Mortis (Dmgvol)
 * Duet Night Abyss (ziadrrr)
 * Killing Floor 3 (NeverRaR)
+* Lost Souls Aside (NoobInCoding)
 
 If you tested this hook on any games and it worked, just leave a comment [in this issue](https://github.com/rm-NoobInCoding/UniversalSigBypasser/issues/2) and I will add its name in here.
 
