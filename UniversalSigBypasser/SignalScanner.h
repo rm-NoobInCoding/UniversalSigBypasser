@@ -1,5 +1,7 @@
 #include <Windows.h>
 #include <Psapi.h>
+#include <string.h>
+#include <sstream>
 
 MODULEINFO GetModuleInfo(const char* szModule)
 {
@@ -39,4 +41,26 @@ DWORD64 FindPattern(const char* module, const char* pattern, const char* mask)
     }
 
     return 0;
+}
+
+DWORD64 FindPatternIDA(const char* module, const char* patternIDA)
+{
+    std::string patternBytes;
+    std::string patternMask;
+    std::stringstream ss(patternIDA);
+    std::string word;
+
+    while (ss >> word)
+    {
+        if (word == "??") {
+            patternBytes.push_back('\x00');
+            patternMask.push_back('?');
+        }
+        else {
+            patternBytes.push_back((char)strtoul(word.c_str(), nullptr, 16));
+            patternMask.push_back('x');
+        }
+    }
+
+    return FindPattern(module, patternBytes.c_str(), patternMask.c_str());
 }

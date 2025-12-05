@@ -43,28 +43,19 @@ void UniversalPatch() {
     LogMessage(LogLevel::INFO, "UniversalPatch", __LINE__, "UniversalSigBypasser Loaded.");
 
     const char* patterns[] = {
-        "\x48\x8D\x0D\x00\x00\x00\x00\xE9\x00\x00\x00\x00\xCC\xCC\xCC\xCC\x48\x83\xEC\x28\xE8\x00\x00\x00\x00\x48\x89\x05\x00\x00\x00\x00\x48\x83\xC4\x28\xC3\xCC\xCC\xCC\xCC\xCC\xCC\xCC\xCC\xCC\xCC\xCC\x48\x8D\x0D\x00\x00\x00\x00\xE9\x00\x00\x00\x00\xCC\xCC\xCC\xCC\x48\x8D\x0D\x00\x00\x00\x00\xE9\x00\x00\x00\x00\xCC\xCC\xCC\xCC",
-        "\x48\x8D\x00\x00\x00\x00\x00\xE9\x00\x00\x00\x00\xCC\xCC\xCC\xCC\x48\x83\xEC\x28\x33\xD2\x48\x8D\x4C\x24\x30\xE8\x00\x00\x00\x00\x48\x8B\xC8\xE8\x00\x00\x00\x00\x48\x89\x00\x00\x00\x00\x00\x48\x83\xC4\x28\xC3\xCC\xCC\xCC\xCC\xCC\xCC\xCC\xCC\xCC\xCC\xCC\xCC\x48\x8D\x00\x00\x00\x00\x00\xE9",
-        "\x48\x83\xEC\x28\x48\x8D\x00\x00\x00\x00\x00\x48\x89\x44\x24\x30\xE8\x00\x00\x00\x00\x48\x8B\xC8\x48\x8D\x54\x24\x30\xE8\x00\x00\x00\x00\x48\x83\xC4\x28\xC3\xCC\xCC\xCC\xCC\xCC\xCC\xCC\xCC\xCC\x48\x83\xEC\x28\x48\x8D\x00\x00\x00\x00\x00\x48\x89\x44\x24\x30\xE8\x00\x00\x00\x00\x48\x8B\xC8\x48\x8D\x54\x24\x30\xE8\x00\x00\x00\x00\x48\x83\xC4\x28\xC3", //Lost Soul Aside
-        "\x40\x53\x48\x83\xEC\x20\x48\x8B\xD9\xFF\x15\x00\x00\x00\x00\x48\x8B\xC8\x48\x83\xC4\x20\x5B\xC3\x41\x8B\xD8",
-        "\x41\x56\x41\x57\x48\x83\xEC\x50\x4C\x8B\xF1\x41\x8B\xD8",
-        "\x48\x8B\xC4\x48\x89\x58\x08\x48\x89\x70\x10\x48\x89\x78\x18\x41\x56\x48\x81\xEC\x00\x00\x00\x00\x45\x8B\xF1"
-    };
-
-    const char* masks[] = {
-        "xxx????x????xxxxxxxxx????xxx????xxxxx???????????xxx????x????xxxxxxx????x????xxxx",
-        "xx?????x????xxxxxxxxxxxxxxxx????xxxx????xx?????xxxxxxxxxxxxxxxxxxx?????x",
-        "xxxxxx?????xxxxxx????xxxxxxxxx????xxxxxxxxxxxxxxxxxxxx?????xxxxxx????xxxxxxxxx????xxxxx", //Lost Soul Aside
-        "xxxxxxxxxxx????xxxxxxxxx",
-        "xxxxxxxxxxxxxx",
-        "xxxxxxxxxxxxxxxxxxx????xx"
+        "48 8D 0D ?? ?? ?? ?? E9 ?? ?? ?? ?? CC CC CC CC 48 83 EC 28 E8 ?? ?? ?? ?? 48 89 05 ?? ?? ?? ?? 48 83 C4 28 C3 ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? 48 8D 0D ?? ?? ?? ?? E9 ?? ?? ?? ?? CC CC CC CC 48 8D 0D ?? ?? ?? ?? E9 ?? ?? ?? ?? CC CC CC CC",
+        "48 8D ?? ?? ?? ?? ?? E9 ?? ?? ?? ?? CC CC CC CC 48 83 EC 28 33 D2 48 8D 4C 24 30 E8 ?? ?? ?? ?? 48 8B C8 E8 ?? ?? ?? ?? 48 89 ?? ?? ?? ?? ?? 48 83 C4 28 C3 CC CC CC CC CC CC CC CC CC CC CC CC 48 8D ?? ?? ?? ?? ?? E9",
+        "48 83 EC 28 48 8D ?? ?? ?? ?? ?? 48 89 44 24 30 E8 ?? ?? ?? ?? 48 8B C8 48 8D 54 24 30 E8 ?? ?? ?? ?? 48 83 C4 28 C3 CC CC CC CC CC CC CC CC CC 48 83 EC 28 48 8D ?? ?? ?? ?? ?? 48 89 44 24 30 E8 ?? ?? ?? ?? 48 8B C8 48 8D 54 24 30 E8 ?? ?? ?? ?? 48 83 C4 28 C3", //Lost Soul Aside
+        "40 53 48 83 EC 20 48 8B D9 FF 15 ?? ?? ?? ?? 48 8B C8 48 83 C4 20 5B C3 41 8B D8",
+        "41 56 41 57 48 83 EC 50 4C 8B F1 41 8B D8",
+        "48 8B C4 48 89 58 08 48 89 70 10 48 89 78 18 41 56 48 81 ?? ?? ?? ?? 00 45 8B F1"
     };
 
     DWORD64 addr64 = 0;
     int offset = 0;
 
     for (int i = 0; i < sizeof(patterns) / sizeof(patterns[0]); ++i) {
-        addr64 = FindPattern(NULL, patterns[i], masks[i]);
+        addr64 = FindPatternIDA(NULL, patterns[i]);
         if (addr64) {
             if (i == 0) offset = 0x37;
             else if (i == 1) offset = 0x47;
