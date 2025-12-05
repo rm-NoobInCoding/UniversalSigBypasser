@@ -11,10 +11,7 @@ bool Patch(BYTE* address) {
     const BYTE patchBytes[] = { 0xB0, 0x01, 0xC3 };
     DWORD oldProtect;
     if (!VirtualProtect(address, sizeof(patchBytes), PAGE_EXECUTE_READWRITE, &oldProtect)) {
-        LogMessage(LogLevel::INFO, "UniversalPatch", __LINE__,
-                   (std::ostringstream() << "Failed to change protection at "
-                                         << std::hex << address)
-                       .str());
+        LogMessage(LogLevel::INFO, "UniversalPatch", __LINE__, (std::ostringstream() << "Failed to change protection at " << std::hex << address).str());
         return false;
     }
 
