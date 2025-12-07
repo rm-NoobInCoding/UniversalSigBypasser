@@ -26,6 +26,7 @@ A hook to bypass the signature check function in Unreal Engine-based games, enab
 * Killing Floor 3 (NeverRaR)
 * Lost Souls Aside (NoobInCoding)
 * Hi-Fi RUSH (NoobInCoding)
+* Little Nightmares III (FEARka)
 
 If you tested this hook on any games and it worked, just leave a comment [in this issue](https://github.com/rm-NoobInCoding/UniversalSigBypasser/issues/2) and I will add its name in here.
 
@@ -38,4 +39,4 @@ If you tested this hook on any games and it worked, just leave a comment [in thi
 This work is licensed under a [Creative Commons Attribution-NonCommercial 4.0 International License](https://creativecommons.org/licenses/by-nc/4.0/).
 
 ## Credits
-LongerWarrior for the original [Lua-based implementation](https://gist.github.com/Buckminsterfullerene02/90077ce81c0fd908144498869f4ea288).
+LongerWarrior
