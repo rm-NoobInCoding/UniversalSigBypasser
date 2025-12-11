@@ -25,7 +25,7 @@ A hook to bypass the signature check function in Unreal Engine-based games, enab
 * Duet Night Abyss (ziadrrr)
 * Killing Floor 3 (NeverRaR)
 * Lost Souls Aside (NoobInCoding)
-* Hi-Fi RUSH (NoobInCoding)
+* Hi-Fi RUSH (NoobInCoding) **Only unpacked version
 * Little Nightmares III (FEARka)
 
 If you tested this hook on any games and it worked, just leave a comment [in this issue](https://github.com/rm-NoobInCoding/UniversalSigBypasser/issues/2) and I will add its name in here.
