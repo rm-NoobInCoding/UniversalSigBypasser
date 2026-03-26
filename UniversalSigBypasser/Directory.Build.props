@@ -1,0 +1,59 @@
+<Project>
+
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+
+  <PropertyGroup Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries Condition="'$(Configuration)' == 'Debug'">true</UseDebugLibraries>
+    <UseDebugLibraries Condition="'$(Configuration)' == 'Release'">false</UseDebugLibraries>
+    <PlatformToolset>v145</PlatformToolset>
+    <WholeProgramOptimization Condition="'$(Configuration)' == 'Release'">true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+
+  <ImportGroup Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+
+  <ItemDefinitionGroup>
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <FunctionLevelLinking Condition="'$(Configuration)' == 'Release'">true</FunctionLevelLinking>
+      <IntrinsicFunctions Condition="'$(Configuration)' == 'Release'">true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;UNIVERSALSIGBYPASSER_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions Condition="'$(Platform)' == 'Win32'">%(PreprocessorDefinitions);WIN32</PreprocessorDefinitions>
+      <PreprocessorDefinitions Condition="'$(Configuration)' == 'Debug'">%(PreprocessorDefinitions);_DEBUG</PreprocessorDefinitions>
+      <PreprocessorDefinitions Condition="'$(Configuration)' == 'Release'">%(PreprocessorDefinitions);NDEBUG</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <PrecompiledHeader Condition="'$(Platform)' == 'Win32'">Use</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Platform)' != 'Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeaderFile Condition="'$(Platform)' == 'Win32'">pch.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderFile Condition="'$(Platform)' != 'Win32'"></PrecompiledHeaderFile>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableUAC>false</EnableUAC>
+    </Link>
+  </ItemDefinitionGroup>
+
+</Project>
